@@ -6,6 +6,7 @@ import type { OrderData, ShoeCustomization } from "../types/shoe";
 import { soleOptions, topOptions } from "../data/shoeOptions";
 import Box from "./Box";
 import { Sparkles } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 function Home() {
   const [customization, setCustomization] = useState<ShoeCustomization>({
@@ -19,16 +20,23 @@ function Home() {
     setIsSubmitting(true);
 
     try {
-      const orderData = {
+      const templateParams = {
         customer_name: formData.customerName,
         customer_email: formData.customerEmail,
         sole_color: customization.sole.name,
         top_color: customization.top.name,
+        to_email: import.meta.env.VITE_RECIPIENT_EMAIL,
+        time: new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' }),
       };
 
-      console.log(orderData)
-      
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('Order sent successfully:', templateParams);
       setOrderSuccess(true);
 
     } catch (error) {
