@@ -9,7 +9,7 @@ function App() {
       <main className='min-h-screen max-w-[1200px] mx-auto'>
         <Home />
       </main>
-      <footer className='absolute bottom-0 w-full'>
+      <footer className='w-full'>
         <Footer />
       </footer>
     </>
