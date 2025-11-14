@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorSelector from "./ColorSelector";
 import OrderForm from "./OrderForm";
 import ShoePreview from "./ShoePreview";
@@ -15,6 +15,10 @@ function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+
+  useEffect(() => {
+    emailjs.init("kA6OrPZRq1CvAwIGk");
+  }, []);
 
   const handleOrderSubmit = async (formData: OrderData) => {
     setIsSubmitting(true);
@@ -33,8 +37,7 @@ function Home() {
       await emailjs.send(
         "service_r23mtj9",
         "template_mvnk9u8",
-        templateParams,
-        "kA6OrPZRq1CvAwIGk"
+        templateParams
       );
 
       console.log('Order sent successfully:', templateParams);
@@ -44,7 +47,7 @@ function Home() {
       console.error('Order submission error:', error);
       alert('An error occurred while submitting your order. Please try again.');
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
@@ -55,24 +58,24 @@ function Home() {
           <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <Sparkles className="w-8 h-8 text-white" />
           </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Order Successful!
-            </h2>
-            <p className="text-gray-600 mb-6">
+          </h2>
+          <p className="text-gray-600 mb-6">
             Thank you for your order! We will contact you shortly.
-            </p>
-            <button
+          </p>
+          <button
             onClick={() => {
               setOrderSuccess(false);
               setCustomization({
-              sole: soleOptions[0],
-              top: topOptions[0],
+                sole: soleOptions[0],
+                top: topOptions[0],
               });
             }}
             className="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors cursor-pointer"
-            >
+          >
             New Order
-            </button>
+          </button>
         </div>
       </div>
     );
