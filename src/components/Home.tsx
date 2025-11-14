@@ -29,8 +29,7 @@ function Home() {
         customer_email: formData.customerEmail,
         sole_color: customization.sole.name,
         top_color: customization.top.name,
-        // to_email: "berron@alfamarketinggroup.hu",
-        to_email: import.meta.env.VITE_RECIPIENT_EMAIL || "kevinkeeeh@gmail.com",
+        to_email: import.meta.env.VITE_RECIPIENT_EMAIL || "berron@alfamarketinggroup.hu",
         time: new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' }),
       };
 
