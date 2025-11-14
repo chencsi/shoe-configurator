@@ -17,15 +17,15 @@ function Home() {
   return (
     <div className="py-10 space-y-10">
       <div className="space-y-3 text-center">
-        <h1 className="text-6xl font-black">Cipő Konfigurátor</h1>
-        <p className="text-lg text-zinc-600">Tervezd meg egyedi cipődet és rendeld meg most!</p>
+        <h1 className="text-6xl font-black">Shoe Configurator</h1>
+        <p className="text-lg text-zinc-600">Design your custom shoe and order it now!</p>
       </div>
       <div className="grid grid-cols-2 gap-10">
         <ShoePreview customization={customization} />
         <div className="space-y-10">
-          <Box title="Testreszabás">
+          <Box title="Customization">
             <ColorSelector
-              title="Felső színe"
+              title="Top color"
               options={topOptions}
               selectedId={customization.top.id}
               onSelect={(option) =>
@@ -33,7 +33,7 @@ function Home() {
               }
             />
             <ColorSelector
-              title="Talp színe"
+              title="Sole Color"
               options={soleOptions}
               selectedId={customization.sole.id}
               onSelect={(option) =>

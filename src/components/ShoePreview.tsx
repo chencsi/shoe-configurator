@@ -6,7 +6,7 @@ interface ShoePreviewProps {
 }
 
 function ShoePreview({ customization }: ShoePreviewProps) {
-  const title = "Előnézet";
+  const title = "Preview";
 
   return (
     <Box title={title}>
