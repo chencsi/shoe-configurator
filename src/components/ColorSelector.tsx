@@ -1,5 +1,4 @@
 import { Check } from "lucide-react";
-import Box from "./Box";
 
 interface ColorOption {
   id: string;
@@ -8,7 +7,7 @@ interface ColorOption {
 }
 
 interface ColorSelectorProps {
-  title: stringm;
+  title: string;
   options: ColorOption[];
   selectedId: string;
   onSelect: (option: ColorOption) => void;
