@@ -25,15 +25,16 @@ function Home() {
         customer_email: formData.customerEmail,
         sole_color: customization.sole.name,
         top_color: customization.top.name,
-        to_email: import.meta.env.VITE_RECIPIENT_EMAIL,
+        // to_email: "berron@alfamarketinggroup.hu",
+        to_email: "kevinkeeeh@gmail.com",
         time: new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' }),
       };
 
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        "service_r23mtj9",
+        "template_mvnk9u8",
         templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        "kA6OrPZRq1CvAwIGk"
       );
 
       console.log('Order sent successfully:', templateParams);
