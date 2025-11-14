@@ -6,10 +6,10 @@ function App() {
 
   return (
     <>
-      <main>
+      <main className='min-h-screen max-w-[1200px] mx-auto'>
         <Home />
       </main>
-      <footer>
+      <footer className='absolute bottom-0 w-full'>
         <Footer />
       </footer>
     </>
