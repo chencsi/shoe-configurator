@@ -17,7 +17,7 @@ function Home() {
   const [orderSuccess, setOrderSuccess] = useState(false);
 
   useEffect(() => {
-    emailjs.init("kA6OrPZRq1CvAwIGk");
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "kA6OrPZRq1CvAwIGk");
   }, []);
 
   const handleOrderSubmit = async (formData: OrderData) => {
@@ -30,13 +30,13 @@ function Home() {
         sole_color: customization.sole.name,
         top_color: customization.top.name,
         // to_email: "berron@alfamarketinggroup.hu",
-        to_email: "kevinkeeeh@gmail.com",
+        to_email: import.meta.env.VITE_RECIPIENT_EMAIL || "kevinkeeeh@gmail.com",
         time: new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' }),
       };
 
       await emailjs.send(
-        "service_r23mtj9",
-        "template_mvnk9u8",
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_r23mtj9",
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_mvnk9u8",
         templateParams
       );
 
