@@ -1,28 +1,34 @@
 import { useForm } from "react-hook-form";
 import Box from "./Box";
-import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
-function OrderForm() {
+import type { OrderData } from "../types/shoe";
+
+interface OrderFormProps {
+  onSubmit: (data: OrderData) => Promise<void>;
+  isSubmitting: boolean;
+}
+
+function OrderForm({ onSubmit, isSubmitting }: OrderFormProps) {
   const title = "Ordering";
-  const [processing, setProcessing] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<{ fullName: string; email: string }>();
 
-  const onSubmit = (data: { fullName: string; email: string }) => {
-    setProcessing(true);
-    setTimeout(() => {
-      setProcessing(false);
-      console.log("Order:", data);
-      alert("Order placed successfully");
-    }, 3000);
+  const handleFormSubmit = async (data: { fullName: string; email: string }) => {
+    const orderData: OrderData = {
+      customerName: data.fullName,
+      customerEmail: data.email,
+      soleColor: "",
+      topColor: "",
+    };
+    await onSubmit(orderData);
   };
 
   return (
     <Box title={title}>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
         <div className="mb-3">
           <label className="block font-semibold mb-1">Full name</label>
           <input
@@ -53,7 +59,7 @@ function OrderForm() {
         </div>
 
         {
-          processing ?
+          isSubmitting ?
             (<button
               disabled
               type="button"

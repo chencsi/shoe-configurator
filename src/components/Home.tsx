@@ -2,9 +2,10 @@ import { useState } from "react";
 import ColorSelector from "./ColorSelector";
 import OrderForm from "./OrderForm";
 import ShoePreview from "./ShoePreview";
-import type { ShoeCustomization } from "../types/shoe";
+import type { OrderData, ShoeCustomization } from "../types/shoe";
 import { soleOptions, topOptions } from "../data/shoeOptions";
 import Box from "./Box";
+import { Sparkles } from "lucide-react";
 
 function Home() {
   const [customization, setCustomization] = useState<ShoeCustomization>({
@@ -13,6 +14,60 @@ function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+
+  const handleOrderSubmit = async (formData: OrderData) => {
+    setIsSubmitting(true);
+
+    try {
+      const orderData = {
+        customer_name: formData.customerName,
+        customer_email: formData.customerEmail,
+        sole_color: customization.sole.name,
+        top_color: customization.top.name,
+      };
+
+      console.log(orderData)
+      
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      setOrderSuccess(true);
+
+    } catch (error) {
+      console.error('Order submission error:', error);
+      alert('An error occurred while submitting your order. Please try again.');
+    } finally {
+      setIsSubmitting(false); 
+    }
+  };
+
+  if (orderSuccess) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
+          <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Sparkles className="w-8 h-8 text-white" />
+          </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Order Successful!
+            </h2>
+            <p className="text-gray-600 mb-6">
+            Thank you for your order! We will contact you shortly.
+            </p>
+            <button
+            onClick={() => {
+              setOrderSuccess(false);
+              setCustomization({
+              sole: soleOptions[0],
+              top: topOptions[0],
+              });
+            }}
+            className="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors cursor-pointer"
+            >
+            New Order
+            </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-10 space-y-10">
@@ -41,7 +96,10 @@ function Home() {
               }
             />
           </Box>
-          <OrderForm />
+          <OrderForm
+            onSubmit={handleOrderSubmit}
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
     </div>
