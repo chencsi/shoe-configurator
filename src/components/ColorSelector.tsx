@@ -58,14 +58,14 @@ function ColorSelector({ title, options, selectedId, onSelect }: ColorSelectorPr
               <button
                 key={option.id}
                 onClick={() => onSelect(option)}
-                className={`relative p-4 rounded-lg border-2 transition-all cursor-pointer ${selectedId === option.id
+                className={`relative p-2 md:p-4 rounded-lg border-2 transition-all cursor-pointer ${selectedId === option.id
                   ? 'border-blue-600 bg-blue-50 shadow-md'
                   : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
                   }`}
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className="w-12 h-12 rounded-full border-2 border-gray-300 flex-shrink-0"
+                    className="w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 border-gray-300 flex-shrink-0"
                     style={{ backgroundColor: option.color }}
                   >
                     {selectedId === option.id && (

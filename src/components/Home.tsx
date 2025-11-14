@@ -17,10 +17,10 @@ function Home() {
   return (
     <div className="py-10 space-y-10">
       <div className="space-y-3 text-center">
-        <h1 className="text-6xl font-black">Shoe Configurator</h1>
-        <p className="text-lg text-zinc-600">Design your custom shoe and order it now!</p>
+        <h1 className="text-5xl md:text-6xl font-black">Shoe Configurator</h1>
+        <p className="md:text-lg text-zinc-600">Design your custom shoe and order it now!</p>
       </div>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-5 md:px-0">
         <ShoePreview customization={customization} />
         <div className="space-y-10">
           <Box title="Customization">
